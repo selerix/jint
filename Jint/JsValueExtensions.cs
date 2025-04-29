@@ -212,6 +212,17 @@ public static class JsValueExtensions
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static DateTime AsDateTime(this JsValue value)
+    {
+        if (!value.IsObject() || !(value is JsDate))
+        {
+            ExceptionHelper.ThrowArgumentException("The value is not an JSDate");
+        }
+
+        return ((JsDate) value).ToDateTime();
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static double AsNumber(this JsValue value)
     {
         if (!value.IsNumber())
